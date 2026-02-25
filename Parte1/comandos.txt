@@ -1,0 +1,6 @@
+Buscan Ubuntu y abres su terminal
+cd LabsPDDL
+
+Para ejecutar:
+    planutils run ff domain.pddl problem1.pddl
+    planutils run ff domain.pddl problem2.pddl
