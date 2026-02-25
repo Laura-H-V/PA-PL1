@@ -1,5 +1,7 @@
 Buscan Ubuntu y abres su terminal
 cd LabsPDDL
+source venv/bin/activate
+cd PL1-Parte1
 
 Para ejecutar:
     planutils run ff domain.pddl problem1.pddl
