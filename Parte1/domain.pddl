@@ -1,74 +1,84 @@
 (define (domain emergencia)
   (:requirements :strips :typing)
-  
+
   (:types
     location
-    person crate content - object
+    person
+    crate
+    content
     drone
   )
-  
+
   (:predicates
-    (at ?x - object ?l - location)
+    (at-drone ?d - drone ?l - location)
+    (at-person ?p - person ?l - location)
+    (at-crate ?c - crate ?l - location)
+
     (has-content ?c - crate ?con - content)
     (has ?p - person ?con - content)
+
     (free-arm1 ?d - drone)
     (free-arm2 ?d - drone)
+
     (carrying-arm1 ?d - drone ?c - crate)
     (carrying-arm2 ?d - drone ?c - crate)
+
+    (available ?c - crate)
   )
-  
-  ; Acción: volar entre localizaciones (transporta lo que lleva)
+
   (:action fly
-    :parameters (?d - drone ?from ?to - location)
-    :precondition (at ?d ?from)
+    :parameters (?d - drone ?from - location ?to - location)
+    :precondition
+      (at-drone ?d ?from)
     :effect
       (and
-        (not (at ?d ?from))
-        (at ?d ?to)
+        (not (at-drone ?d ?from))
+        (at-drone ?d ?to)
       )
   )
-  
-  ; Coger caja con brazo 1
+
   (:action pickup-arm1
     :parameters (?d - drone ?c - crate ?l - location)
     :precondition
       (and
-        (at ?d ?l)
-        (at ?c ?l)
+        (at-drone ?d ?l)
+        (at-crate ?c ?l)
         (free-arm1 ?d)
+        (available ?c)
       )
     :effect
       (and
-        (not (at ?c ?l))
+        (not (at-crate ?c ?l))
         (not (free-arm1 ?d))
+        (not (available ?c))
         (carrying-arm1 ?d ?c)
       )
   )
-  
-  ; Coger caja con brazo 2
+
   (:action pickup-arm2
     :parameters (?d - drone ?c - crate ?l - location)
     :precondition
       (and
-        (at ?d ?l)
-        (at ?c ?l)
+        (at-drone ?d ?l)
+        (at-crate ?c ?l)
         (free-arm2 ?d)
+        (available ?c)
       )
     :effect
       (and
-        (not (at ?c ?l))
+        (not (at-crate ?c ?l))
         (not (free-arm2 ?d))
+        (not (available ?c))
         (carrying-arm2 ?d ?c)
       )
   )
-  
-  ; Entregar caja de brazo 1 a persona
+
   (:action deliver-arm1
     :parameters (?d - drone ?c - crate ?p - person ?con - content ?l - location)
     :precondition
       (and
-        (at ?d ?l)
-        (at ?p ?l)
+        (at-drone ?d ?l)
+        (at-person ?p ?l)
         (carrying-arm1 ?d ?c)
         (has-content ?c ?con)
       )
@@ -79,14 +89,13 @@
         (has ?p ?con)
       )
   )
-  
-  ; Entregar caja de brazo 2 a persona
+
   (:action deliver-arm2
     :parameters (?d - drone ?c - crate ?p - person ?con - content ?l - location)
     :precondition
       (and
-        (at ?d ?l)
-        (at ?p ?l)
+        (at-drone ?d ?l)
+        (at-person ?p ?l)
         (carrying-arm2 ?d ?c)
         (has-content ?c ?con)
       )

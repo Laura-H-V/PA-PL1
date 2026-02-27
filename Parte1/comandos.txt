@@ -3,6 +3,12 @@ cd LabsPDDL
 source venv/bin/activate
 cd PL1-Parte1
 
-Para ejecutar:
+Ejercicio 1.1
     planutils run ff domain.pddl problem1.pddl
     planutils run ff domain.pddl problem2.pddl
+
+Ejercicio 1.2:
+    Apartado 1: python3 generate-problem.py -d 1 -r 0 -l 5 -p 5 -c 5 -g 5
+                planutils run ff domain.pddl drone_problem_d1_r0_l5_p5_c5_g5_ct2.pddl
+
+    Apartado 2: 
