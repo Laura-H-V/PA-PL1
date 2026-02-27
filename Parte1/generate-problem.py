@@ -30,7 +30,7 @@ content_types = ["food", "medicine"]
 ########################################################################################
 
 # Set seed to 0 if you want more predictability...
-# random.seed(0);
+random.seed(0)
 
 ########################################################################################
 # Helper functions

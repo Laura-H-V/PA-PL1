@@ -11,4 +11,15 @@ Ejercicio 1.2:
     Apartado 1: python3 generate-problem.py -d 1 -r 0 -l 5 -p 5 -c 5 -g 5
                 planutils run ff domain.pddl drone_problem_d1_r0_l5_p5_c5_g5_ct2.pddl
 
-    Apartado 2: 
+    Apartado 2: python3 test_large_problems.py
+                He probado con 48 hasta 53
+        48: 36,42 seg
+        49: 70,44 seg
+        50: 66,95 seg
+        51: 51,81 seg
+        52: 85, 08 seg
+        53: 186.04
+        
+        ahora cambio en generate-problem.py y descomento la linea random.seed(0)
+        vuelvo a lanzar el programa test_large_problems.py 
+        ahora con 2 hasta 60
