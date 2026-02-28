@@ -1,0 +1,6 @@
+(pickup-arm1 drone1 crate2 depot)
+(pickup-arm2 drone1 crate1 depot)
+(fly drone1 depot loc2)
+(deliver-arm1 drone1 crate2 person2 medicine loc2)
+(deliver-arm2 drone1 crate1 person2 food loc2)
+(fly drone1 loc2 depot)

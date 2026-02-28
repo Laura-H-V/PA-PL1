@@ -1,0 +1,6 @@
+(define (problem simple-problem)
+(:domain simple)
+(:objects A B)
+(:init (at A))
+(:goal (at B))
+)

@@ -1,0 +1,5 @@
+alg,max_n_under_60s,time_s,plan_len
+BFS,7,15.0,22
+IDS,3,0.21,10
+A*,6,43.0,19
+GBFS,7,5.4,26

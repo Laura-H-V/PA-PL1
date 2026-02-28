@@ -3,6 +3,11 @@ cd LabsPDDL
 source venv/bin/activate
 cd PL1-Parte1
 
+lo que uso yo pa meterne en la carpeta
+wsl -d Ubuntu
+cd LabsPDDL
+source venv/bin/actívate
+
 Ejercicio 1.1
     planutils run ff domain.pddl problem1.pddl
     planutils run ff domain.pddl problem2.pddl
@@ -23,3 +28,10 @@ Ejercicio 1.2:
         ahora cambio en generate-problem.py y descomento la linea random.seed(0)
         vuelvo a lanzar el programa test_large_problems.py 
         ahora con 2 hasta 60
+
+para instalar pyperplan
+	pip install pyperplan
+
+para ejecutar pyperplan de prueba
+	pyperplan domain.pddl problem1.pddl
+	
