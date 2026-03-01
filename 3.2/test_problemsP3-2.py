@@ -4,11 +4,10 @@ from pathlib import Path
 
 DOMAIN = "domain.pddl"
 TIME_LIMIT = 60
-
 N_MAX = 7
 
 SEARCHES = ["gbf", "ehs"]               
-HEURISTICS = ["hmax", "hadd", "hff", "landmark"]  # [web:6]
+HEURISTICS = ["hmax", "hadd", "hff", "landmark"]  
 
 re_time = re.compile(r"Search time:\s*([0-9.eE+-]+)")
 re_len  = re.compile(r"Plan length:\s*(\d+)")

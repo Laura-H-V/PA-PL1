@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 import subprocess, re, csv
 from pathlib import Path
 
@@ -80,7 +80,7 @@ def main():
                 t, L = solved.get((alg, nmax), (None, None))
                 w.writerow({"alg": alg, "max_n_under_60s": nmax, "time_s": t, "plan_len": L})
 
-    print("OK: 13_1_all.csv y 13_1_max.csv (con plan_len)")
+    print("OK: 13_1_all.csv y 13_1_max.csv")
 
 if __name__ == "__main__":
     main()
