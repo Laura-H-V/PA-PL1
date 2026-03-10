@@ -1,0 +1,6 @@
+n,problem,search,heuristic,ok_60s,time_s,plan_len
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,bfs,,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,ids,,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,astar,blind,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,astar,hmax,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,astar,lmcut,False,,

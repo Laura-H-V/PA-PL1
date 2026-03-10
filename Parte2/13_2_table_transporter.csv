@@ -1,0 +1,9 @@
+n,problem,search,heuristic,ok_60s,time_s,plan_len
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,gbf,hmax,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,gbf,hadd,True,5.4,46
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,gbf,hff,True,4.3,39
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,gbf,landmark,True,0.33,42
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,ehs,hmax,False,,
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,ehs,hadd,True,17.0,53
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,ehs,hff,True,15.0,41
+7,drone_problem_d1_r1_l7_p7_c7_g7_ct2_tc4.pddl,ehs,landmark,True,1.1,59
