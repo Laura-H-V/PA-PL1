@@ -1,9 +1,9 @@
+
 import subprocess, re, csv
 from pathlib import Path
 
 DOMAIN = "domain.pddl"
 GENERATOR = "generate-problem.py"
-
 TIME_LIMIT = 60
 N_MAX = 7
 
@@ -18,40 +18,6 @@ HEURISTICS = ["hmax", "hadd", "hff", "landmark"]
 re_time = re.compile(r"Search time:\s*([0-9.eE+-]+)")
 re_len  = re.compile(r"Plan length:\s*(\d+)")
 
-
-def ensure_problem_exists():
-    """Genera el problema con el nuevo generador si no existe."""
-    problem_name = (
-        f"drone_problem_d{D}_r{R}_l{N_MAX}_p{N_MAX}_c{N_MAX}_g{N_MAX}_ct2_tc{CAP}"
-    )
-    problem_file = problem_name + ".pddl"
-
-    if Path(problem_file).exists():
-        return problem_file
-
-    cmd = [
-        "python3", GENERATOR,
-        "-d", str(D),
-        "-r", str(R),
-        "-l", str(N_MAX),
-        "-p", str(N_MAX),
-        "-c", str(N_MAX),
-        "-g", str(N_MAX),
-        "--transporter-capacity", str(CAP),
-    ]
-    print("Generando problema:", " ".join(cmd))
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    if r.returncode != 0:
-        print(r.stdout)
-        print(r.stderr)
-        raise RuntimeError("Error generando el problema con generate-problem.py")
-
-    if not Path(problem_file).exists():
-        raise FileNotFoundError(f"Se esperaba {problem_file} pero no se ha creado")
-
-    return problem_file
-
-
 def run(problem: str, search: str, heur: str):
     cmd = ["pyperplan", "-s", search, "-H", heur, DOMAIN, problem]
     try:
@@ -65,9 +31,28 @@ def run(problem: str, search: str, heur: str):
     except subprocess.TimeoutExpired:
         return False, None, None
 
-
 def main():
-    problem = ensure_problem_exists()
+    problem = f"drone_problem_d{D}_r{R}_l{N_MAX}_p{N_MAX}_c{N_MAX}_g{N_MAX}_ct2_tc{CAP}.pddl"
+    if not Path(problem).exists():
+        # Si no existe, lo generamos con el nuevo generador
+        cmd = [
+            "python3", GENERATOR,
+            "-d", str(D),
+            "-r", str(R),
+            "-l", str(N_MAX),
+            "-p", str(N_MAX),
+            "-c", str(N_MAX),
+            "-g", str(N_MAX),
+            "--transporter-capacity", str(CAP),
+        ]
+        print("Generando problema:", " ".join(cmd))
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        if r.returncode != 0:
+            print(r.stdout)
+            print(r.stderr)
+            raise RuntimeError("Error generando el problema con generate-problem.py")
+        if not Path(problem).exists():
+            raise FileNotFoundError(f"No existe {problem} tras generarlo")
 
     rows = []
     for s in SEARCHES:
@@ -84,15 +69,11 @@ def main():
             })
 
     with open("13_2_table_transporter.csv", "w", newline="") as f:
-        w = csv.DictWriter(
-            f,
-            fieldnames=["n", "problem", "search", "heuristic", "ok_60s", "time_s", "plan_len"]
-        )
+        w = csv.DictWriter(f, fieldnames=["n","problem","search","heuristic","ok_60s","time_s","plan_len"])
         w.writeheader()
         w.writerows(rows)
 
     print("OK: 13_2_table_transporter.csv")
-
 
 if __name__ == "__main__":
     main()
