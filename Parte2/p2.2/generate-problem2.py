@@ -337,7 +337,7 @@ def main():
                     continue
                 cost = flight_cost(location_coords, i, j)
                 f.write(f"\t(= (fly-cost {loc_from} {loc_to}) {cost})\n")
-            f.write(")\n")
+        f.write(")\n")
 
 
         ######################################################################
@@ -359,11 +359,10 @@ def main():
                     # with this specific content
 
         f.write("\t))\n")
-        f.write(")\n")
 
         # Métrica de coste total
         f.write("(:metric minimize (total-cost))\n")
-        f.write(")\n")  # fin define(problem ...)
+        f.write(")\n")  
 
 if __name__ == '__main__':
     main()
