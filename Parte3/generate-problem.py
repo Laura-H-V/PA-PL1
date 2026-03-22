@@ -155,7 +155,7 @@ def main():
 
     parser = OptionParser(usage='python generator.py [-help] options...')
     parser.add_option('-d', '--drones', metavar='NUM', dest='drones', action='store', type=int, help='the number of drones')
-    parser.add_option('-t', '--transporters', metavar='NUM', type=int, dest='transporters',
+    parser.add_option('-t', '-r', '--transporters', metavar='NUM', type=int, dest='transporters',
                       help='the number of transporters')
     parser.add_option('-l', '--locations', metavar='NUM', type=int, dest='locations',
                       help='the number of locations apart from the depot ')
