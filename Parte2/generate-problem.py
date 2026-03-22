@@ -155,8 +155,8 @@ def main():
 
     parser = OptionParser(usage='python generator.py [-help] options...')
     parser.add_option('-d', '--drones', metavar='NUM', dest='drones', action='store', type=int, help='the number of drones')
-    parser.add_option('-r', '--carriers', metavar='NUM', type=int, dest='carriers',
-                      help='the number of carriers, for later labs; use 0 for no carriers')
+    parser.add_option('-r', '--transporters', metavar='NUM', type=int, dest='transporters',
+                      help='the number of transporters; use 0 to generate a single default transporter')
     parser.add_option('-l', '--locations', metavar='NUM', type=int, dest='locations',
                       help='the number of locations apart from the depot ')
     parser.add_option('-p', '--persons', metavar='NUM', type=int, dest='persons', help='the number of persons')
@@ -172,8 +172,8 @@ def main():
         print("You must specify --drones (use --help for help)")
         sys.exit(1)
 
-    if options.carriers is None:
-        print("You must specify --carriers (use --help for help)")
+    if options.transporters is None:
+        print("You must specify --transporters (use --help for help)")
         sys.exit(1)
 
     if options.locations is None:
@@ -209,7 +209,7 @@ def main():
         sys.exit(1)
 
     print("Drones\t\t", options.drones)
-    print("Carriers\t", options.carriers)
+    print("Transporters\t", 1)
     print("Locations\t", options.locations)
     print("Persons\t\t", options.persons)
     print("Crates\t\t", options.crates)
@@ -223,17 +223,14 @@ def main():
     drone = []
     person = []
     crate = []
-    carrier = []
-    location = []
     transporter = ["transporter1"]
+    location = []
 
     location.append("depot")
     for x in range(options.locations):
         location.append("loc" + str(x + 1))
     for x in range(options.drones):
         drone.append("drone" + str(x + 1))
-    for x in range(options.carriers):
-        carrier.append("carrier" + str(x + 1))
     for x in range(options.persons):
         person.append("person" + str(x + 1))
     for x in range(options.crates):
@@ -257,7 +254,7 @@ def main():
     need = setup_person_needs(options, crates_with_contents)
 
     # Define a problem name
-    problem_name = "drone_problem_d" + str(options.drones) + "_r" + str(options.carriers) + \
+    problem_name = "drone_problem_d" + str(options.drones) + "_r" + str(options.transporters) + \
                    "_l" + str(options.locations) + "_p" + str(options.persons) + "_c" + str(options.crates) + \
                    "_g" + str(options.goals) + "_ct" + str(len(content_types)) + \
                    "_tc" + str(options.transporter_capacity)
@@ -291,7 +288,8 @@ def main():
         for x in person:
             f.write("\t" + x + " - person\n")
 
-        f.write("\ttransporter1 - transporter\n")
+        for x in transporter:
+            f.write("\t" + x + " - transporter\n")
 
         for i in range(options.transporter_capacity + 1):
             f.write("\tn" + str(i) + " - num\n")
@@ -310,8 +308,9 @@ def main():
             f.write("\t(free-arm " + d + ")\n")
 
         
-        f.write("\t(at-transporter transporter1 depot)\n")
-        f.write("\t(load transporter1 n0)\n")
+        for t in transporter:
+            f.write("\t(at-transporter " + t + " depot)\n")
+            f.write("\t(load " + t + " n0)\n")
 
         for i in range(options.transporter_capacity):
             f.write("\t(next n" + str(i) + " n" + str(i+1) + ")\n")

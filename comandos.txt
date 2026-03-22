@@ -35,3 +35,11 @@ para instalar pyperplan
 para ejecutar pyperplan de prueba
 	pyperplan domain.pddl problem1.pddl
 	
+
+PARTE 3
+python3 generate-problem.py -d 3 -r 2 -l 5 -p 5 -c 5 -g 5
+planutils run optic domain.pddl drone_problem_d3_r2_l5_p5_c5_g5_ct2_tc4.pddl
+
+
+python3 generate-problem.py -d 2 -r 1 -l 3 -p 3 -c 3 -g 3
+planutils run optic domain.pddl drone_problem_d2_r1_l3_p3_c3_g3_ct2_tc4.pddl
